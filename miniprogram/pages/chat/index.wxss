@@ -1,0 +1,156 @@
+/* 聊天页样式 */
+.chat-page {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  background-color: #f5f5f5;
+}
+
+/* 消息列表 */
+.message-list {
+  flex: 1;
+  padding: 24rpx;
+}
+
+.loading {
+  text-align: center;
+  padding: 20rpx;
+  color: #999;
+  font-size: 24rpx;
+}
+
+/* 消息项 */
+.message-item {
+  display: flex;
+  margin-bottom: 32rpx;
+}
+
+.message-item.self {
+  flex-direction: row-reverse;
+}
+
+.message-item .avatar {
+  width: 80rpx;
+  height: 80rpx;
+  border-radius: 8rpx;
+  flex-shrink: 0;
+}
+
+/* 消息内容 */
+.message-content {
+  max-width: 60%;
+  margin: 0 16rpx;
+}
+
+.sender-name {
+  font-size: 24rpx;
+  color: #999;
+  margin-bottom: 8rpx;
+}
+
+.bubble {
+  padding: 20rpx 24rpx;
+  background-color: #fff;
+  border-radius: 8rpx;
+  word-break: break-all;
+  line-height: 1.5;
+}
+
+.self .bubble {
+  background-color: #007AFF;
+  color: #fff;
+}
+
+/* 图片消息 */
+.image-bubble {
+  padding: 8rpx;
+  max-width: 400rpx;
+}
+
+.image-bubble image {
+  max-width: 100%;
+  border-radius: 4rpx;
+}
+
+/* 语音消息 */
+.voice-bubble {
+  display: flex;
+  align-items: center;
+  min-width: 120rpx;
+}
+
+.voice-bubble image {
+  width: 32rpx;
+  height: 32rpx;
+  margin-right: 8rpx;
+}
+
+/* 消息状态 */
+.message-status {
+  display: flex;
+  align-items: center;
+  margin-top: 8rpx;
+}
+
+.message-status image {
+  width: 28rpx;
+  height: 28rpx;
+}
+
+
+/* 输入区域 */
+.input-area {
+  background-color: #fff;
+  border-top: 1rpx solid #eee;
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+.input-row {
+  display: flex;
+  align-items: center;
+  padding: 16rpx 24rpx;
+}
+
+.input-row .icon {
+  width: 56rpx;
+  height: 56rpx;
+  margin: 0 8rpx;
+}
+
+.input-row .input {
+  flex: 1;
+  height: 72rpx;
+  padding: 0 24rpx;
+  background-color: #f5f5f5;
+  border-radius: 8rpx;
+  font-size: 28rpx;
+}
+
+/* 更多功能面板 */
+.more-panel {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 32rpx;
+  background-color: #f5f5f5;
+}
+
+.more-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 25%;
+  margin-bottom: 32rpx;
+}
+
+.more-item image {
+  width: 100rpx;
+  height: 100rpx;
+  background-color: #fff;
+  border-radius: 16rpx;
+  margin-bottom: 12rpx;
+}
+
+.more-item text {
+  font-size: 24rpx;
+  color: #666;
+}

@@ -1,0 +1,31 @@
+<!--个人中心页-->
+<view class="profile-page">
+  <!--用户信息-->
+  <view class="user-card" bindtap="onUserInfoTap">
+    <image class="avatar" src="{{userInfo.faceURL || '/assets/icons/default-avatar.png'}}" mode="aspectFill" />
+    <view class="info">
+      <text class="name">{{userInfo.nickname || '未设置昵称'}}</text>
+      <text class="id">ID: {{userInfo.userID}}</text>
+    </view>
+    <image class="arrow" src="/assets/icons/arrow-right.png" />
+  </view>
+
+  <!--功能列表-->
+  <view class="menu-list">
+    <view class="menu-item" bindtap="onSettingTap">
+      <image src="/assets/icons/setting.png" />
+      <text>设置</text>
+      <image class="arrow" src="/assets/icons/arrow-right.png" />
+    </view>
+    <view class="menu-item" bindtap="onAboutTap">
+      <image src="/assets/icons/about.png" />
+      <text>关于</text>
+      <image class="arrow" src="/assets/icons/arrow-right.png" />
+    </view>
+  </view>
+
+  <!--退出登录-->
+  <view class="logout-btn" bindtap="onLogout">
+    <text>退出登录</text>
+  </view>
+</view>

@@ -1,0 +1,71 @@
+<!--消息项组件-->
+<wxs module="utils">
+  module.exports.isSelf = function(sendID, selfUserID) {
+    return sendID === selfUserID;
+  }
+</wxs>
+<view class="message-item {{utils.isSelf(message.sendID, selfUserID) ? 'self' : 'other'}}">
+  <!--头像-->
+  <image 
+    class="avatar" 
+    src="{{message.senderFaceUrl || '/assets/icons/default-avatar.png'}}" 
+    mode="aspectFill"
+    wx:if="{{!utils.isSelf(message.sendID, selfUserID)}}"
+    bindtap="onAvatarTap"
+  />
+
+  <view class="content-wrap">
+    <!--发送者昵称-->
+    <text class="sender-name" wx:if="{{!utils.isSelf(message.sendID, selfUserID) && showName}}">{{message.senderNickname}}</text>
+
+    <!--消息气泡-->
+    <view class="bubble-wrap">
+      <!--文本消息-->
+      <view class="bubble text-bubble" wx:if="{{message.contentType === 101}}" bindlongpress="onLongPress">
+        <text selectable>{{message.textElem.content}}</text>
+      </view>
+
+      <!--图片消息-->
+      <view class="bubble image-bubble" wx:elif="{{message.contentType === 102}}" bindtap="onImageTap">
+        <image src="{{message.pictureElem.snapshotPicture.url}}" mode="widthFix" />
+      </view>
+
+      <!--语音消息-->
+      <view class="bubble voice-bubble {{playing ? 'playing' : ''}}" wx:elif="{{message.contentType === 103}}" bindtap="onVoiceTap">
+        <image src="/assets/icons/voice{{isSelf ? '-white' : ''}}.png" class="voice-icon" />
+        <text>{{message.soundElem.duration}}"</text>
+      </view>
+
+      <!--视频消息-->
+      <view class="bubble video-bubble" wx:elif="{{message.contentType === 104}}" bindtap="onVideoTap">
+        <image src="{{message.videoElem.snapshotUrl}}" mode="aspectFill" />
+        <image class="play-icon" src="/assets/icons/play.png" />
+      </view>
+
+      <!--位置消息-->
+      <view class="bubble location-bubble" wx:elif="{{message.contentType === 109}}" bindtap="onLocationTap">
+        <text class="location-name">{{message.locationElem.description}}</text>
+        <image src="{{message.locationElem.snapshotUrl || '/assets/icons/map.png'}}" mode="aspectFill" />
+      </view>
+
+      <!--其他消息-->
+      <view class="bubble" wx:else>
+        <text class="unsupported">[暂不支持的消息类型]</text>
+      </view>
+    </view>
+
+    <!--消息状态-->
+    <view class="status" wx:if="{{utils.isSelf(message.sendID, selfUserID)}}">
+      <image wx:if="{{message.status === 1}}" src="/assets/icons/sending.png" class="status-icon" />
+      <image wx:elif="{{message.status === 3}}" src="/assets/icons/failed.png" class="status-icon" bindtap="onResend" />
+    </view>
+  </view>
+
+  <!--自己的头像-->
+  <image 
+    class="avatar" 
+    src="{{selfFaceUrl || '/assets/icons/default-avatar.png'}}" 
+    mode="aspectFill"
+    wx:if="{{utils.isSelf(message.sendID, selfUserID)}}"
+  />
+</view>

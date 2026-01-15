@@ -1,0 +1,99 @@
+/* 通讯录样式 */
+.contacts-page {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  background-color: #f5f5f5;
+}
+
+.search-bar {
+  padding: 16rpx 24rpx;
+  background-color: #fff;
+}
+
+.search-input {
+  display: flex;
+  align-items: center;
+  height: 64rpx;
+  padding: 0 20rpx;
+  background-color: #f5f5f5;
+  border-radius: 8rpx;
+}
+
+.search-icon {
+  width: 32rpx;
+  height: 32rpx;
+  margin-right: 12rpx;
+}
+
+.search-input input {
+  flex: 1;
+  font-size: 28rpx;
+}
+
+/* 功能入口 */
+.entry-list {
+  background-color: #fff;
+  margin-bottom: 16rpx;
+}
+
+.entry-item {
+  display: flex;
+  align-items: center;
+  padding: 24rpx;
+  border-bottom: 1rpx solid #f0f0f0;
+}
+
+.entry-item image {
+  width: 72rpx;
+  height: 72rpx;
+  margin-right: 24rpx;
+}
+
+.entry-item text {
+  flex: 1;
+  font-size: 30rpx;
+}
+
+.entry-item .badge {
+  margin-left: auto;
+}
+
+/* 好友列表 */
+.friend-list {
+  flex: 1;
+  background-color: #fff;
+}
+
+.friend-item {
+  display: flex;
+  align-items: center;
+  padding: 20rpx 24rpx;
+  border-bottom: 1rpx solid #f0f0f0;
+}
+
+.friend-item:active {
+  background-color: #f5f5f5;
+}
+
+.friend-item .avatar {
+  width: 80rpx;
+  height: 80rpx;
+  border-radius: 8rpx;
+  margin-right: 24rpx;
+}
+
+.friend-item .info {
+  flex: 1;
+}
+
+.friend-item .name {
+  font-size: 30rpx;
+  color: #333;
+}
+
+.empty {
+  text-align: center;
+  padding: 100rpx 0;
+  color: #999;
+}

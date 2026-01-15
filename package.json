@@ -1,0 +1,32 @@
+{
+  "name": "openim-mini-programe",
+  "version": "1.0.0",
+  "description": "OpenIM 小程序客户端模块，提供即时通讯功能封装",
+  "main": "src/index.js",
+  "module": "src/index.js",
+  "exports": {
+    ".": "./src/index.js",
+    "./constants": "./src/constants/index.js",
+    "./utils": "./src/utils/index.js",
+    "./modules/*": "./src/modules/*.js"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "openim",
+    "im",
+    "miniprogram",
+    "wechat",
+    "chat"
+  ],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@openim/client-sdk": "^3.8.3"
+  },
+  "devDependencies": {},
+  "peerDependencies": {
+    "@openim/client-sdk": ">=3.0.0"
+  }
+}

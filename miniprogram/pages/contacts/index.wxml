@@ -1,0 +1,37 @@
+<!--通讯录页-->
+<view class="contacts-page">
+  <!--搜索栏-->
+  <view class="search-bar">
+    <view class="search-input">
+      <image class="search-icon" src="/assets/icons/search.png" />
+      <input placeholder="搜索" placeholder-class="placeholder" bindinput="onSearch" />
+    </view>
+  </view>
+
+  <!--功能入口-->
+  <view class="entry-list">
+    <view class="entry-item" bindtap="onNewFriendTap">
+      <image src="/assets/icons/new-friend.png" />
+      <text>新的朋友</text>
+      <view class="badge" wx:if="{{friendRequestCount > 0}}">{{friendRequestCount}}</view>
+    </view>
+    <view class="entry-item" bindtap="onGroupListTap">
+      <image src="/assets/icons/group.png" />
+      <text>群聊</text>
+    </view>
+  </view>
+
+  <!--好友列表-->
+  <scroll-view class="friend-list" scroll-y enhanced show-scrollbar="{{false}}">
+    <view wx:for="{{friendList}}" wx:key="userID" class="friend-item" bindtap="onFriendTap" data-item="{{item}}">
+      <image class="avatar" src="{{item.faceURL || '/assets/icons/default-avatar.png'}}" mode="aspectFill" />
+      <view class="info">
+        <text class="name">{{item.remark || item.nickname}}</text>
+      </view>
+    </view>
+
+    <view class="empty" wx:if="{{friendList.length === 0}}">
+      <text>暂无好友</text>
+    </view>
+  </scroll-view>
+</view>

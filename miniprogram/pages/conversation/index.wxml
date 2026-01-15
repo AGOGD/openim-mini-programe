@@ -1,0 +1,48 @@
+<!--会话列表页-->
+<view class="conversation-page">
+  <!--搜索栏-->
+  <view class="search-bar">
+    <view class="search-input">
+      <image class="search-icon" src="/assets/icons/search.png" />
+      <input placeholder="搜索" placeholder-class="placeholder" bindinput="onSearch" />
+    </view>
+  </view>
+
+  <!--会话列表-->
+  <scroll-view class="conversation-list" scroll-y enhanced show-scrollbar="{{false}}">
+    <view 
+      class="conversation-item" 
+      wx:for="{{conversationList}}" 
+      wx:key="conversationID"
+      bindtap="onConversationTap"
+      bindlongpress="onConversationLongPress"
+      data-item="{{item}}"
+    >
+      <!--头像-->
+      <view class="avatar-wrap">
+        <image class="avatar" src="{{item.faceURL || '/assets/icons/default-avatar.png'}}" mode="aspectFill" />
+        <view class="badge" wx:if="{{item.unreadCount > 0}}">
+          {{item.unreadCount > 99 ? '99+' : item.unreadCount}}
+        </view>
+      </view>
+
+      <!--内容-->
+      <view class="content">
+        <view class="top-row">
+          <text class="name text-ellipsis">{{item.showName}}</text>
+          <text class="time">{{item.latestMsgSendTimeStr}}</text>
+        </view>
+        <view class="bottom-row">
+          <text class="message text-ellipsis text-gray">{{item.latestMsgContent}}</text>
+          <image class="mute-icon" wx:if="{{item.recvMsgOpt === 2}}" src="/assets/icons/mute.png" />
+        </view>
+      </view>
+    </view>
+
+    <!--空状态-->
+    <view class="empty" wx:if="{{conversationList.length === 0 && !loading}}">
+      <image src="/assets/icons/empty.png" />
+      <text>暂无会话</text>
+    </view>
+  </scroll-view>
+</view>

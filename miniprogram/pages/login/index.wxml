@@ -1,0 +1,30 @@
+<!--登录页-->
+<view class="login-page">
+  <view class="logo-area">
+    <image class="logo" src="/assets/icons/logo.png" />
+    <text class="title">OpenIM</text>
+    <text class="subtitle">开源即时通讯</text>
+  </view>
+
+  <view class="form-area">
+    <view class="input-item">
+      <text class="label">用户ID</text>
+      <input placeholder="请输入用户ID" value="{{userID}}" bindinput="onUserIDInput" />
+    </view>
+    <view class="input-item">
+      <text class="label">Token</text>
+      <input placeholder="请输入Token" value="{{token}}" bindinput="onTokenInput" password />
+    </view>
+
+    <button class="login-btn" bindtap="onLogin" loading="{{loading}}">
+      登录
+    </button>
+  </view>
+
+  <view class="footer">
+    <text>登录即表示同意</text>
+    <text class="link">《用户协议》</text>
+    <text>和</text>
+    <text class="link">《隐私政策》</text>
+  </view>
+</view>

@@ -1,0 +1,113 @@
+<!--聊天页-->
+<view class="chat-page">
+  <!--消息列表-->
+  <scroll-view 
+    class="message-list" 
+    scroll-y 
+    scroll-into-view="{{scrollToMessage}}"
+    bindscrolltoupper="onScrollToUpper"
+    enhanced
+    show-scrollbar="{{false}}"
+  >
+    <view class="loading" wx:if="{{isLoading}}">
+      <text>加载中...</text>
+    </view>
+
+    <view 
+      class="message-item {{item.sendID === selfUserID ? 'self' : 'other'}}"
+      wx:for="{{messageList}}"
+      wx:key="clientMsgID"
+      id="msg-{{item.clientMsgID}}"
+    >
+      <!--头像-->
+      <image 
+        class="avatar" 
+        src="{{item.senderFaceUrl || '/assets/icons/default-avatar.png'}}" 
+        mode="aspectFill"
+        wx:if="{{item.sendID !== selfUserID}}"
+      />
+
+      <!--消息内容-->
+      <view class="message-content">
+        <!--发送者昵称（群聊显示）-->
+        <text class="sender-name" wx:if="{{item.sendID !== selfUserID && isGroup}}">
+          {{item.senderNickname}}
+        </text>
+
+        <!--文本消息-->
+        <view class="bubble" wx:if="{{item.contentType === 101}}">
+          <text selectable>{{item.textElem.content}}</text>
+        </view>
+
+        <!--图片消息-->
+        <view class="bubble image-bubble" wx:elif="{{item.contentType === 102}}">
+          <image 
+            src="{{item.pictureElem.snapshotPicture.url || item.pictureElem.sourcePicture.url}}" 
+            mode="widthFix"
+            bindtap="onImageTap"
+            data-url="{{item.pictureElem.sourcePicture.url}}"
+          />
+        </view>
+
+        <!--语音消息-->
+        <view class="bubble voice-bubble" wx:elif="{{item.contentType === 103}}" bindtap="onVoiceTap" data-item="{{item}}">
+          <image src="/assets/icons/voice.png" />
+          <text>{{item.soundElem.duration}}"</text>
+        </view>
+
+        <!--其他消息类型-->
+        <view class="bubble" wx:else>
+          <text class="text-gray">[暂不支持的消息类型]</text>
+        </view>
+
+        <!--消息状态-->
+        <view class="message-status" wx:if="{{item.sendID === selfUserID}}">
+          <image wx:if="{{item.status === 1}}" src="/assets/icons/sending.png" />
+          <image wx:elif="{{item.status === 3}}" src="/assets/icons/failed.png" bindtap="onResend" data-item="{{item}}" />
+        </view>
+      </view>
+
+      <!--自己的头像-->
+      <image 
+        class="avatar" 
+        src="{{selfFaceUrl || '/assets/icons/default-avatar.png'}}" 
+        mode="aspectFill"
+        wx:if="{{item.sendID === selfUserID}}"
+      />
+    </view>
+  </scroll-view>
+
+  <!--输入区域-->
+  <view class="input-area">
+    <view class="input-row">
+      <image class="icon" src="/assets/icons/voice-input.png" bindtap="onVoiceInputTap" />
+      <input 
+        class="input" 
+        value="{{inputValue}}" 
+        bindinput="onInput" 
+        bindconfirm="onSend"
+        confirm-type="send"
+        placeholder="输入消息..."
+        adjust-position="{{false}}"
+      />
+      <image class="icon" src="/assets/icons/emoji.png" bindtap="onEmojiTap" />
+      <image class="icon" src="/assets/icons/more.png" bindtap="onMoreTap" />
+    </view>
+
+    <!--更多功能面板-->
+    <view class="more-panel" wx:if="{{showMore}}">
+      <view class="more-item" bindtap="onChooseImage">
+        <image src="/assets/icons/photo.png" />
+        <text>相册</text>
+      </view>
+      <view class="more-item" bindtap="onTakePhoto">
+        <image src="/assets/icons/camera.png" />
+        <text>拍摄</text>
+      </view>
+      <view class="more-item" bindtap="onChooseLocation">
+        <image src="/assets/icons/location.png" />
+        <text>位置</text>
+      </view>
+    </view>
+  </view>
+</view>
